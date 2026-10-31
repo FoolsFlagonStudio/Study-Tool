@@ -1,0 +1,59 @@
+{
+  "id": "precalc",
+  "title": "Precalculus",
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "Foundations of Algebra and Functions",
+      "modules": [
+        {
+          "id": "s1m1",
+          "number": 1,
+          "title": "Polynomials and Exponents",
+          "file": "section-1/module-1-polynomials-and-exponents.md",
+          "topics": [
+            { "id": "polynomial-basics", "heading": "1. What Is a Polynomial?" },
+            { "id": "classifying-polynomials", "heading": "2. Naming Polynomials" },
+            { "id": "combining-like-terms", "heading": "3. Combining Like Terms" },
+            { "id": "laws-of-exponents", "heading": "4. The Laws of Exponents" },
+            { "id": "negative-exponents", "heading": "5. Getting Rid of Negative Exponents" },
+            { "id": "adding-polynomials", "heading": "6. Adding Polynomials" },
+            { "id": "subtracting-polynomials", "heading": "7. Subtracting Polynomials" },
+            { "id": "multiplying-polynomials", "heading": "8. Multiplying Polynomials" },
+            { "id": "square-roots", "heading": "9. Square Roots" },
+            { "id": "rational-exponents", "heading": "10. Rational Exponents" }
+          ]
+        },
+        {
+          "id": "s1m2",
+          "number": 2,
+          "title": "Algebraic Expressions and Equations",
+          "file": "section-1/module-2-algebraic-expressions-and-equations.md",
+          "topics": [
+            { "id": "translating-words", "heading": "1. Translating Words into Math" },
+            { "id": "multi-operation-expressions", "heading": "2. Phrases with More Than One Operation" },
+            { "id": "simplifying-rational-exponents", "heading": "3. Simplifying Roots with Rational Exponents" },
+            { "id": "solving-rational-exponent-equations", "heading": "4. Solving Equations with Rational Exponents" }
+          ]
+        },
+        {
+          "id": "s1m3",
+          "number": 3,
+          "title": "Functions and Composition",
+          "file": "section-1/module-3-functions-and-composition.md",
+          "topics": [
+            { "id": "relations-domain-range", "heading": "1. Relations, Domain, and Range" },
+            { "id": "identifying-functions", "heading": "2. What Makes a Relation a Function?" },
+            { "id": "function-notation", "heading": "4. Reading Function Notation in Context" },
+            { "id": "types-of-functions", "heading": "5. Four Function Families" },
+            { "id": "asymptotes", "heading": "5. Four Function Families" },
+            { "id": "evaluating-functions", "heading": "6. Evaluating Functions" },
+            { "id": "function-composition", "heading": "7. Function Composition" },
+            { "id": "decomposing-functions", "heading": "8. Decomposing Functions" },
+            { "id": "composition-models", "heading": "9. Building Models with Composition" }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+# local study data
+data/
+*.db
+
+# private reference notes - never commit course material that isn't original
+precalc-notes/
+private/
+
+.DS_Store
+.vscode/
+.idea/

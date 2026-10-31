@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Tool</title>
+  <meta name="description" content="Generated practice quizzes and notes for precalculus, by topic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#practice">Study Tool</a>
+    <nav aria-label="Main">
+      <a href="#practice" data-view="practice">Practice</a>
+      <a href="#notes" data-view="notes">Notes</a>
+      <a href="#progress" data-view="progress">Progress</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Practice: setup, quiz, results -->
+    <section id="view-practice" class="view" hidden>
+      <div id="setup">
+        <h1>Practice</h1>
+
+        <div class="daily">
+          <div>
+            <h2>Daily review</h2>
+            <p class="muted">A mixed quiz across everything you've covered, weighted toward the topics you miss.</p>
+          </div>
+          <div class="daily-controls">
+            <label>Covered through
+              <select id="current-module"></select>
+            </label>
+            <button class="primary" id="start-daily">Start daily review</button>
+          </div>
+        </div>
+
+        <h2>Custom quiz</h2>
+        <div id="topic-picker"></div>
+
+        <div class="options">
+          <label>Questions
+            <input id="count" type="number" min="1" max="50" value="10">
+          </label>
+          <fieldset class="segmented">
+            <legend>Answer style</legend>
+            <label><input type="radio" name="mode" value="mixed" checked> Mixed</label>
+            <label><input type="radio" name="mode" value="mc"> Multiple choice</label>
+            <label><input type="radio" name="mode" value="input"> Type it in</label>
+          </fieldset>
+          <label class="check"><input id="adaptive" type="checkbox"> Focus on weak spots</label>
+          <label class="check"><input id="timed" type="checkbox"> Show a timer</label>
+        </div>
+        <p class="error" id="setup-error" role="alert"></p>
+        <button class="primary" id="start-custom">Start quiz</button>
+      </div>
+
+      <div id="quiz" hidden>
+        <div class="quiz-head">
+          <ol class="bubbles" id="bubbles" aria-label="Quiz progress"></ol>
+          <span class="timer" id="timer" hidden></span>
+          <button class="quiet" id="quit">End quiz</button>
+        </div>
+        <article class="sheet" id="question"></article>
+      </div>
+
+      <div id="results" hidden></div>
+    </section>
+
+    <!-- Notes -->
+    <section id="view-notes" class="view notes-layout" hidden>
+      <aside class="module-list" id="module-list" aria-label="Modules"></aside>
+      <article class="prose" id="notes-body"></article>
+    </section>
+
+    <!-- Progress -->
+    <section id="view-progress" class="view" hidden>
+      <h1>Progress</h1>
+      <div id="progress-body"></div>
+    </section>
+  </main>
+
+  <script src="vendor/katex/katex.min.js"></script>
+  <script src="vendor/marked/marked.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
