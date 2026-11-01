@@ -153,20 +153,23 @@ label { display: inline-flex; align-items: center; gap: 0.5rem; }
 
 /* ---------------------------------------------------------------- setup */
 
-.daily {
+.covered { margin: 0.5rem 0 1rem; flex-wrap: wrap; }
+
+.mode-block {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  gap: 1.5rem;
+  gap: 1rem 1.5rem;
   flex-wrap: wrap;
   padding: 1.25rem 0 1.5rem;
-  margin-bottom: 2rem;
   border-bottom: 1px solid var(--rule);
 }
 
-.daily h2 { margin-bottom: 0.25rem; }
-.daily p { margin: 0; max-width: 46ch; }
-.daily-controls { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.mode-block:last-of-type { margin-bottom: 2rem; }
+.mode-block h2 { margin-bottom: 0.25rem; }
+.mode-block p { margin: 0; max-width: 46ch; }
+.block-controls { display: flex; gap: 0.75rem 1rem; align-items: center; flex-wrap: wrap; }
+.block-controls input[type="number"] { width: 4.5rem; }
 
 .picker-module { margin-bottom: 1.5rem; }
 
@@ -252,8 +255,13 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 1
 .bubble.current { border-color: var(--graphite); color: var(--graphite); box-shadow: 0 0 0 3px var(--ink-soft); }
 .bubble.right { background: var(--graphite); border-color: var(--graphite); color: var(--paper); }
 .bubble.wrong { border-color: var(--red-pen); color: var(--red-pen); background: var(--red-soft); }
+.bubble.answered { background: var(--ink-soft); border-color: var(--ink); color: var(--graphite); }
+.bubble.skipped { border-style: dashed; color: var(--pencil); border-color: var(--pencil); }
 
-.timer { font-variant-numeric: tabular-nums; color: var(--pencil); }
+.timer { font-variant-numeric: tabular-nums; font-weight: 700; font-size: var(--step-1); color: var(--graphite); }
+.timer.low { color: var(--red-pen); }
+.pace { color: var(--pencil); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+.pace.behind { color: var(--red-pen); }
 
 .sheet {
   border-top: 2px solid var(--ink);
@@ -350,6 +358,8 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 1
 
 /* ---------------------------------------------------------------- results */
 
+.results-head > div:last-child { flex: 1; min-width: 16rem; }
+
 .results-head {
   display: flex;
   align-items: center;
@@ -379,7 +389,12 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 1
 }
 
 .breakdown { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; table-layout: fixed; }
-.breakdown th:first-child { width: 45%; }
+.breakdown th:first-child { width: 40%; }
+.exam-history th:first-child { width: 14%; }
+.topic-table th:nth-child(1) { width: 34%; }
+.topic-table th:nth-child(2) { width: 26%; }
+.breakdown .meter { width: 5rem; }
+.breakdown td.verdict { margin: 0; }
 .breakdown th, .breakdown td { text-align: left; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
 .breakdown th { color: var(--pencil); font-weight: 400; font-size: var(--step--1); }
 .breakdown td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -387,6 +402,12 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 1
 .missed { list-style: none; padding: 0; margin: 0 0 2rem; max-width: var(--measure); }
 .missed li { border-bottom: 1px solid var(--rule); padding: 1rem 0; }
 .missed .label { color: var(--pencil); font-size: var(--step--1); }
+
+.verdict { margin: 0.5rem 0 0; font-weight: 700; }
+.verdict.ready { color: var(--good); }
+.verdict.not-ready { color: var(--red-pen); }
+
+.exam-history td .meter { width: 5rem; }
 
 /* ---------------------------------------------------------------- progress */
 

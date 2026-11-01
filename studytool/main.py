@@ -35,6 +35,18 @@ class CheckRequest(BaseModel):
     format: str = Field(pattern="^(mc|input)$")
     response: str = Field(max_length=300)
     record: bool = True
+    seconds: float | None = Field(None, ge=0, le=36000, description="Time spent on the question")
+
+
+class SessionRequest(BaseModel):
+    kind: str = Field(pattern="^(exam|daily|custom|review)$")
+    topics: list[str] = Field(max_length=100)
+    question_count: int = Field(ge=1, le=200)
+    answered: int = Field(ge=0, le=200)
+    correct: int = Field(ge=0, le=200)
+    duration_seconds: float = Field(ge=0, le=36000)
+    time_limit_seconds: float | None = Field(None, ge=0, le=36000)
+    timed_out: bool = False
 
 
 class PreviewRequest(BaseModel):
@@ -76,7 +88,7 @@ def module_content(module_id: str):
 @app.get("/api/quiz")
 def quiz(
     topics: str = Query(..., description="Comma-separated topic ids"),
-    count: int = Query(10, ge=1, le=50),
+    count: int = Query(10, ge=1, le=100),
     mode: str = Query("mixed"),
     adaptive: bool = False,
     seed: int | None = None,
@@ -102,7 +114,7 @@ def check(req: CheckRequest):
         raise HTTPException(422, f"This problem doesn't support {req.format!r} answers")
     result = checker.check(problem, req.format, req.response)
     if result.valid and req.record:
-        history.record(problem.id, problem.topic, req.format, result.correct)
+        history.record(problem.id, problem.topic, req.format, result.correct, req.seconds)
     return {
         "correct": result.correct,
         "valid": result.valid,
@@ -136,6 +148,19 @@ def stats():
         "accuracy": correct / attempts if attempts else None,
         "days_studied": history.days_studied(),
     }
+
+
+@app.post("/api/sessions")
+def record_session(req: SessionRequest):
+    if req.correct > req.answered or req.answered > req.question_count:
+        raise HTTPException(422, "correct <= answered <= question_count")
+    session_id = history.record_session(**req.model_dump())
+    return {"id": session_id}
+
+
+@app.get("/api/sessions")
+def list_sessions(kind: str | None = None, limit: int = Query(30, ge=1, le=200)):
+    return {"sessions": history.sessions(kind, limit)}
 
 
 @app.delete("/api/stats")

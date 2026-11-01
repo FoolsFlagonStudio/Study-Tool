@@ -10,8 +10,9 @@ It started as a way to study for a precalculus course: take a generated practice
 - **Multiple choice or typed answers.** Wrong choices come from real mistakes (forgetting the middle term of $(x+a)^2$, distributing a minus sign to only the first term, adding exponents instead of multiplying), so a wrong pick tells you something.
 - **Answers checked by math, not string matching.** Typed answers go through [SymPy](https://www.sympy.org): `2(x+3)`, `2x+6` and `6 + 2*x` are all the same answer. When a question asks for a specific form, an equivalent but unfinished answer gets told what's missing ("multiply everything out", "the radicand 72 still has a perfect square factor").
 - **Daily review.** A quiz across everything covered so far, weighted toward the topics you miss most.
+- **Practice exams.** Exam conditions: a countdown (60 minutes by default), a pace indicator, no feedback until you finish, and an automatic finish when time runs out. Each exam is judged on score *and* time, so a perfect score that runs over the limit doesn't count as ready.
 - **Notes for every topic.** Lessons in Markdown with LaTeX, rendered with KaTeX, linked from every question.
-- **Progress tracking.** Accuracy per topic, so weak spots are easy to see and drill.
+- **Progress tracking.** Accuracy and average time per topic, plus a history of practice exams, so weak and slow spots are easy to see and drill.
 
 ## Running it
 
@@ -74,7 +75,9 @@ The registry handles the rest: shuffling choices, removing distractors that turn
 | `GET` | `/api/quiz?topics=a,b&count=10&mode=mixed&adaptive=true` | Generate a quiz (answers not included) |
 | `POST` | `/api/check` | Check an answer, log the attempt, return the explanation |
 | `POST` | `/api/preview` | Render typed input as LaTeX while you type |
-| `GET` | `/api/stats` | Accuracy per topic and days studied |
+| `GET` | `/api/stats` | Accuracy and average time per topic, days studied |
+| `POST` | `/api/sessions` | Log a finished quiz or exam (score, duration, time limit) |
+| `GET` | `/api/sessions?kind=exam` | Practice exam history |
 
 Interactive docs are at `/docs` while the server is running.
 

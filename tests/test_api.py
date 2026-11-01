@@ -68,3 +68,35 @@ def test_adaptive_weights_favor_missed_topics():
 def test_preview():
     assert client.post("/api/preview", json={"text": "x^(3/4)"}).json()["latex"] == "x^{\\frac{3}{4}}"
     assert client.post("/api/preview", json={"text": "import os"}).json()["error"]
+
+
+def test_timing_and_sessions():
+    history.reset()
+    item = client.get("/api/quiz", params={"topics": "square-roots", "count": 1, "mode": "mc"}).json()["problems"][0]
+    answer = get_problem(item["id"]).spec.answer
+    client.post("/api/check", json={"problem_id": item["id"], "format": "mc", "response": answer, "seconds": 42.5})
+    rows = {row["topic"]: row for row in client.get("/api/stats").json()["topics"]}
+    assert rows["square-roots"]["avg_seconds"] == 42.5
+
+    exam = {"kind": "exam", "topics": ["square-roots"], "question_count": 20, "answered": 18, "correct": 16,
+            "duration_seconds": 3600, "time_limit_seconds": 3600, "timed_out": True}
+    assert client.post("/api/sessions", json=exam).status_code == 200
+    assert client.post("/api/sessions", json={**exam, "correct": 19}).status_code == 422
+    sessions = client.get("/api/sessions", params={"kind": "exam"}).json()["sessions"]
+    assert len(sessions) == 1 and sessions[0]["score"] == 0.8 and sessions[0]["timed_out"] is True
+
+
+def test_old_database_is_migrated(tmp_path):
+    import sqlite3
+
+    from studytool.history import History
+
+    path = tmp_path / "old.db"
+    db = sqlite3.connect(path)
+    db.execute("CREATE TABLE attempts (id INTEGER PRIMARY KEY, problem_id TEXT, topic TEXT, format TEXT, correct INTEGER, created_at TEXT)")
+    db.execute("INSERT INTO attempts VALUES (1, 'square-roots:1', 'square-roots', 'mc', 1, '2026-10-31T00:00:00+00:00')")
+    db.commit()
+    db.close()
+    migrated = History(path)
+    migrated.record("square-roots:2", "square-roots", "mc", True, 10)
+    assert migrated.topic_stats()["square-roots"]["attempts"] == 2

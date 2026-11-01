@@ -27,17 +27,32 @@
       <div id="setup">
         <h1>Practice</h1>
 
-        <div class="daily">
+        <label class="covered">I've covered the course through
+          <select id="current-module"></select>
+        </label>
+
+        <div class="mode-block">
           <div>
             <h2>Daily review</h2>
             <p class="muted">A mixed quiz across everything you've covered, weighted toward the topics you miss.</p>
           </div>
-          <div class="daily-controls">
-            <label>Covered through
-              <select id="current-module"></select>
-            </label>
+          <div class="block-controls">
             <button class="primary" id="start-daily">Start daily review</button>
           </div>
+        </div>
+
+        <div class="mode-block">
+          <div>
+            <h2>Practice exam</h2>
+            <p class="muted">Exam conditions: a countdown, no feedback until you finish, and unanswered questions count as missed.</p>
+          </div>
+          <div class="block-controls">
+            <label>Questions <input id="exam-count" type="number" min="5" max="100" value="30"></label>
+            <label>Minutes <input id="exam-minutes" type="number" min="5" max="240" value="60"></label>
+            <label>Target score <input id="exam-target" type="number" min="1" max="100" value="80"> %</label>
+            <button class="primary" id="start-exam">Start practice exam</button>
+          </div>
+          <p class="error" id="exam-error" role="alert"></p>
         </div>
 
         <h2>Custom quiz</h2>
@@ -54,7 +69,6 @@
             <label><input type="radio" name="mode" value="input"> Type it in</label>
           </fieldset>
           <label class="check"><input id="adaptive" type="checkbox"> Focus on weak spots</label>
-          <label class="check"><input id="timed" type="checkbox"> Show a timer</label>
         </div>
         <p class="error" id="setup-error" role="alert"></p>
         <button class="primary" id="start-custom">Start quiz</button>
@@ -63,7 +77,8 @@
       <div id="quiz" hidden>
         <div class="quiz-head">
           <ol class="bubbles" id="bubbles" aria-label="Quiz progress"></ol>
-          <span class="timer" id="timer" hidden></span>
+          <span class="timer" id="timer" role="timer" aria-live="off"></span>
+          <span class="pace" id="pace"></span>
           <button class="quiet" id="quit">End quiz</button>
         </div>
         <article class="sheet" id="question"></article>
