@@ -90,3 +90,4 @@ Current coverage, Section 1 (Foundations of Algebra and Functions):
 1. Polynomials and Exponents
 2. Algebraic Expressions and Equations
 3. Functions and Composition
+4. Inverse Functions

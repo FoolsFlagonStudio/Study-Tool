@@ -1,3 +1,3 @@
 """Importing this package registers every problem generator."""
 
-from . import expressions, functions, polynomials  # noqa: F401
+from . import expressions, functions, inverses, polynomials  # noqa: F401

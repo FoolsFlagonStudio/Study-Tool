@@ -39,3 +39,14 @@ Notes for building generators in the study tool. Each row is a problem template;
 | function-composition | $f(g(a))$ from tables, equations, or mixed | number | evaluate in wrong order; multiply instead of compose |
 | decomposing-functions | Given $h$ (and sometimes $f$ or $g$), find the missing function(s) | pair of functions | outer/inner swapped; candidate that doesn't compose back |
 | composition-models | Word problem → $g(f(x))$; evaluate at a value; circle/square/sphere/cube with linear radius or side | expression / number (exact or rounded) | wrong composition order; forget to square/cube the rate; decimal approximation when exact asked |
+
+## Module 4: Inverse Functions
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| one-to-one-functions | Formula, ordered pairs, or described graph → one-to-one? | Yes / No | even powers / absolute value look fine; repeated outputs missed; restricted domain overlooked |
+| inverse-from-table | Table or point of $f$ → $f^{-1}(a)$ or point on $f^{-1}$ | number / point | reading the input row instead of the output row ($f(a)$ instead of $f^{-1}(a)$); keeping the point unswapped |
+| inverse-domain-range | Domain and range of $f$ (or graph endpoints) → domain or range of $f^{-1}$ | interval | not swapping; reversed endpoints; open instead of closed |
+| verifying-inverses | Linear or cubic pair $f, g$ → inverses? | Yes / No | near-miss inverse with one sign flipped; only checking one direction |
+| finding-inverses | Linear, cubic, or $\frac{a}{x - b}$ → $f^{-1}(x)$ | expression | wrong order of undoing; sign errors; reciprocal $\frac{1}{f(x)}$; forgot to swap |
+| inverse-applications | Linear model + known output → input | number | plug into $f$ instead of $f^{-1}$; subtract and divide in the wrong order |
+| composing-inverses | Points of $g$ + table of $f$ → $(f^{-1} \circ g^{-1})(a)$ | number | use $f$ instead of $f^{-1}$; wrong order; stop after the inner step |
