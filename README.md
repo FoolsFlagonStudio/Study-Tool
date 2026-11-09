@@ -85,9 +85,14 @@ Interactive docs are at `/docs` while the server is running.
 
 Everything in `content/` is original writing: explanations, examples and practice questions written for this project. Topic coverage follows a typical precalculus sequence.
 
-Current coverage, Section 1 (Foundations of Algebra and Functions):
+Current coverage:
 
+**Section 1 - Foundations of Algebra and Functions**
 1. Polynomials and Exponents
 2. Algebraic Expressions and Equations
 3. Functions and Composition
 4. Inverse Functions
+
+**Section 2 - Linear and Quadratic Functions**
+
+5. Linear Functions and Systems

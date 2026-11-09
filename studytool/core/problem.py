@@ -43,6 +43,7 @@ class Spec:
     choices: list[str] | None = None
     allow_input: bool = True
     tex_options: dict = field(default_factory=dict)  # passed to sympy.latex for distractors
+    ordered: bool = False  # numbers answer is an ordered pair/tuple, e.g. (x, y), not a set
 
 
 @dataclass
@@ -110,7 +111,7 @@ def make_problem(topic_id: str, seed: int) -> Problem:
         for option in [*spec.distractors, None, *_fallbacks(spec)]:
             if option is None:  # end of the generator's own distractors
                 using_fallbacks = True
-            elif not checker.same_answer(spec, option):
+            elif _finite(option) and not checker.same_answer(spec, option):
                 option = display(option, spec.tex_options)
                 if option != spec.answer and option not in wrong:
                     wrong.append(option)
@@ -125,6 +126,14 @@ def make_problem(topic_id: str, seed: int) -> Problem:
     return Problem(id=f"{topic_id}:{seed}", topic=topic_id, spec=spec, choices=choices)
 
 
+def _finite(option) -> bool:
+    """False for distractors like 1/0 that a generator produced by accident."""
+    import sympy as sp
+
+    values = option if isinstance(option, (list, tuple)) else [option]
+    return not any(isinstance(v, sp.Basic) and (v.has(sp.zoo, sp.oo, -sp.oo, sp.nan)) for v in values)
+
+
 def _fallbacks(spec: Spec) -> list:
     """Generic near-misses, used only when a generator's own distractors
     collapse into fewer than three distinct wrong answers."""
@@ -133,19 +142,26 @@ def _fallbacks(spec: Spec) -> list:
         return [e + 1, e - 1, -e, 2 * e, e + 2]
     if spec.kind == "numbers":
         vals = list(spec.expected)
-        return [[v + 1 for v in vals], [v - 1 for v in vals], [-v for v in vals], [v + 2 for v in vals], [2 * v for v in vals]]
+        kind = tuple if spec.ordered else list
+        options = [[v + 1 for v in vals], [v - 1 for v in vals], [-v for v in vals], [v + 2 for v in vals], [2 * v for v in vals]]
+        if spec.ordered and len(vals) == 2:
+            options = [vals[::-1], [vals[0], -vals[1]], [-vals[0], vals[1]], *options]
+        return [kind(o) for o in options]
     return []
 
 
 def display(option, tex_options: dict | None = None) -> str:
-    """Display text for a distractor given as text, a SymPy expression, or a list of numbers."""
+    """Display text for a distractor given as text, a SymPy expression, a list of
+    numbers (shown as a set of answers) or a tuple (shown as an ordered pair)."""
     import sympy as sp
 
-    from .symbols import show_numbers, tex
+    from .symbols import show_numbers, show_pair, tex
 
     if isinstance(option, sp.Basic):
         return tex(option, **(tex_options or {}))
-    if isinstance(option, (list, tuple)):
+    if isinstance(option, tuple):
+        return show_pair(option)
+    if isinstance(option, list):
         return show_numbers(option)
     return str(option)
 

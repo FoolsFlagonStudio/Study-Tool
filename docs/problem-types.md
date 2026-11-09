@@ -50,3 +50,16 @@ Notes for building generators in the study tool. Each row is a problem template;
 | finding-inverses | Linear, cubic, or $\frac{a}{x - b}$ → $f^{-1}(x)$ | expression | wrong order of undoing; sign errors; reciprocal $\frac{1}{f(x)}$; forgot to swap |
 | inverse-applications | Linear model + known output → input | number | plug into $f$ instead of $f^{-1}$; subtract and divide in the wrong order |
 | composing-inverses | Points of $g$ + table of $f$ → $(f^{-1} \circ g^{-1})(a)$ | number | use $f$ instead of $f^{-1}$; wrong order; stop after the inner step |
+
+## Module 5: Linear Functions and Systems
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| solving-linear-equations | $ax + b = c$, $\frac{x}{a} + b = c$, $a(x + b) = c$, variables on both sides | number | divide before subtracting; sign error moving a term; forgot to distribute |
+| linear-models | Fixed fee + rate story → model or evaluate | expression / number | swap rate and fixed amount; add instead of multiply; percent not converted |
+| intercepts | $y = mx + b$ or $ax + by = c$ → $x$- or $y$-intercept | number | swap $x$ and $y$; sign error ($\frac{b}{m}$ instead of $-\frac{b}{m}$) |
+| slope-and-line-forms | Two points → slope; point + slope → $y = mx + b$ | number / expression | mismatched subtraction order; run over rise; forgot to distribute $m$ |
+| checking-system-solutions | Pair + system → solution? or pick the solving pair | Yes / No, pair | pair that only fits one equation; swapped coordinates |
+| substitution-method | One equation solved (or easily solved) for a variable | ordered pair | sign error distributing; swapped coordinates; stop after one variable |
+| elimination-method | $ax + by = c$ pairs needing 0, 1 or 2 multiplications | ordered pair | forgot to multiply the constant; sign error; swapped coordinates |
+| types-of-systems | Two equations → independent / dependent / inconsistent | choice | parallel vs. same line confusion; judge by intercepts instead of slopes |
+| system-word-problems | Current / wind, tickets, mixture, break-even | number(s) / system | times swapped; with/against swapped; count and value equations mixed up |

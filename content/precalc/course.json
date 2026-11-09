@@ -159,6 +159,56 @@
           ]
         }
       ]
+    },
+    {
+      "id": "section-2",
+      "title": "Linear and Quadratic Functions",
+      "modules": [
+        {
+          "id": "s2m5",
+          "number": 5,
+          "title": "Linear Functions and Systems",
+          "file": "section-2/module-5-linear-functions-and-systems.md",
+          "topics": [
+            {
+              "id": "solving-linear-equations",
+              "heading": "1. Solving Linear Equations"
+            },
+            {
+              "id": "linear-models",
+              "heading": "2. Writing Linear Models"
+            },
+            {
+              "id": "intercepts",
+              "heading": "3. Intercepts and Graphing"
+            },
+            {
+              "id": "slope-and-line-forms",
+              "heading": "4. Slope and the Forms of a Line"
+            },
+            {
+              "id": "checking-system-solutions",
+              "heading": "5. Systems of Equations"
+            },
+            {
+              "id": "substitution-method",
+              "heading": "6. Solving by Substitution"
+            },
+            {
+              "id": "elimination-method",
+              "heading": "7. Solving by Elimination (Addition)"
+            },
+            {
+              "id": "types-of-systems",
+              "heading": "8. Types of Systems"
+            },
+            {
+              "id": "system-word-problems",
+              "heading": "9. Word Problems with Systems"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

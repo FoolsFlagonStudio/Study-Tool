@@ -102,6 +102,25 @@ def show_numbers(values) -> str:
     return " and ".join(f"${sp.latex(val)}$" for val in sorted(unique, key=float))
 
 
+def nice_number(val) -> str:
+    """LaTeX for a number: terminating fractions as decimals (0.25), others as fractions."""
+    val = sp.nsimplify(val)
+    if val.is_Rational and not val.is_Integer:
+        q = int(val.q)
+        while q % 2 == 0:
+            q //= 2
+        while q % 5 == 0:
+            q //= 5
+        if q == 1:
+            return fmt_num(val)
+    return sp.latex(val)
+
+
+def show_pair(values) -> str:
+    """Display an ordered pair (or tuple) of numbers, e.g. ``$(0.25, 4)$``."""
+    return "$(" + ", ".join(nice_number(v) for v in values) + ")$"
+
+
 def ordinal(nth: int) -> str:
     suffix = "th" if 10 <= nth % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(nth % 10, "th")
     return f"{nth}{suffix}"

@@ -138,7 +138,9 @@ def parse_numbers(text: str) -> list[sp.Expr]:
     """Parse one or more numbers: ``27``, ``-27, 27``, ``±27``, ``{1, 2, 3}``, ``x = 8 or x = -8``."""
     text = normalize(text.replace("+/-", "±").replace("+-", "±")) if "=" not in text else text
     text = re.sub(r"\b[a-z]\s*=", "", text)
-    text = text.replace("{", "").replace("}", "")
+    text = text.replace("{", "").replace("}", "").strip()
+    if text.startswith("(") and text.endswith(")") and _has_top_level_comma(text[1:-1]):
+        text = text[1:-1]  # an ordered pair like (2, -3)
     text = re.sub(r"\b(or|and)\b", ",", text)
     values: list[sp.Expr] = []
     for chunk in (c.strip() for c in _split_top_level(text)):
@@ -176,6 +178,13 @@ def equivalent(left: sp.Expr, right: sp.Expr) -> bool:
     return True
 
 
+def same_sequence(given, expected, tolerance: float = 0.0) -> bool:
+    """Ordered comparison, for answers like (x, y)."""
+    return len(given) == len(expected) and all(
+        abs(float(g) - float(e)) <= max(tolerance, 1e-9) for g, e in zip(given, expected)
+    )
+
+
 def same_numbers(given, expected, tolerance: float = 0.0) -> bool:
     def close(u, v):
         return abs(float(u) - float(v)) <= max(tolerance, 1e-9)
@@ -200,6 +209,8 @@ def same_answer(spec: Spec, option) -> bool:
     if spec.kind == "expr" and isinstance(option, sp.Basic):
         return equivalent(option, spec.expected)
     if spec.kind == "numbers" and isinstance(option, (list, tuple)):
+        if spec.ordered:
+            return same_sequence(option, spec.expected, spec.tolerance)
         return same_numbers(option, spec.expected, spec.tolerance)
     return False
 
@@ -321,6 +332,14 @@ def _check_expr(spec: Spec, text: str, expr: sp.Expr) -> Result:
 
 
 def _check_numbers(spec: Spec, values: list) -> Result:
+    if spec.ordered:
+        if same_sequence(values, spec.expected, spec.tolerance):
+            return Result(True)
+        if len(values) != len(spec.expected):
+            return Result(False, valid=False, feedback=f"Enter {len(spec.expected)} values, like (2, -3).")
+        if same_sequence(values[::-1], spec.expected, spec.tolerance):
+            return Result(False, feedback="Close - you have the coordinates swapped. Write it as (x, y).")
+        return Result(False)
     if same_numbers(values, spec.expected, spec.tolerance):
         return Result(True)
     expected = spec.expected
@@ -339,6 +358,10 @@ def preview(text: str) -> str:
     """LaTeX for what the student has typed so far, keeping their structure."""
     if not text.strip():
         return ""
+    stripped = text.strip()
+    if stripped.startswith("(") and stripped.endswith(")") and _has_top_level_comma(stripped[1:-1]):
+        parts = [_preview_number(part) for part in _split_top_level(stripped[1:-1])]
+        return "\\left(" + ",\\ ".join(parts) + "\\right)"
     if _has_top_level_comma(text) or "±" in text or "+-" in text or " or " in text:
         chunks = [piece for part in _split_top_level(text) for piece in part.split(" or ")]
         return ",\\ ".join(_preview_number(chunk) for chunk in chunks if chunk.strip())
@@ -348,4 +371,13 @@ def preview(text: str) -> str:
 def _preview_number(chunk: str) -> str:
     chunk = chunk.strip().replace("+-", "±")
     sign = "\\pm " if chunk.startswith("±") else ""
-    return sign + sp.latex(parse_expression(chunk.lstrip("±"), evaluate=False))
+    body = chunk.lstrip("±")
+    if re.fullmatch(r"\s*-?\s*\d+(\.\d+)?\s*(/\s*\d+)?\s*", body):
+        # A plain number or fraction: show it as typed ("0.5", "-3/4") rather than as SymPy's 1·(1/4).
+        number = body.replace(" ", "")
+        if "/" in number:
+            top, bottom = number.split("/")
+            neg = top.startswith("-")
+            return sign + ("-" if neg else "") + f"\\frac{{{top.lstrip('-')}}}{{{bottom}}}"
+        return sign + number
+    return sign + sp.latex(parse_expression(body, evaluate=False))
