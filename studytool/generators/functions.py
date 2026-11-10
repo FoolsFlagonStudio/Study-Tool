@@ -188,14 +188,14 @@ def function_notation(rng: random.Random) -> Spec:
             answer=ctx["right"].format(**fill),
             kind="choice",
             distractors=[w.format(**fill) for w in ctx["wrong"]],
-            explanation=f"The number inside the parentheses, {a}, is the input. The number on the other side, {fmt_num(b)}, is the output.",
+            explanation=f"The number inside the parentheses, ${a}$, is the input. The number on the other side, ${fmt_num(b)}$, is the output.",
         )
     return Spec(
         prompt=f"{ctx['setup']} Write this statement in function notation: “{ctx['sentence'].format(**fill)}”",
         answer=f"${fn}({a}) = {fmt_num(b)}$",
         kind="choice",
         distractors=[f"${fn}({fmt_num(b)}) = {a}$", f"${a}{fn} = {fmt_num(b)}$", f"${fn} = {a}({fmt_num(b)})$", f"${fn}({a} + {fmt_num(b)})$"],
-        explanation=f"The input ({a}) goes inside the parentheses and the output ({fmt_num(b)}) goes on the other side of the equals sign.",
+        explanation=f"The input (${a}$) goes inside the parentheses and the output (${fmt_num(b)}$) goes on the other side of the equals sign.",
     )
 
 

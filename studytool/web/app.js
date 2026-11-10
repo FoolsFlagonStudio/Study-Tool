@@ -483,7 +483,7 @@ function showResults() {
     entry.right += r?.correct ? 1 : 0;
     if (r && !r.skipped && r.seconds != null) entry.seconds.push(r.seconds);
   });
-  const missed = problems.map((problem, i) => ({ problem, r: results[i] })).filter(({ r }) => !r?.correct);
+  const missed = problems.map((problem, i) => ({ problem, r: results[i], n: i + 1 })).filter(({ r }) => !r?.correct);
   const missedTopics = [...new Set(missed.map(({ problem }) => problem.topic))];
 
   const timeLine = timeLimit
@@ -497,14 +497,28 @@ function showResults() {
   const verdict = exam ? examVerdict({ score, target, duration, timeLimit, timedOut }) : null;
 
   const box = $("#results");
-  box.replaceChildren(
+  fill(box,
     el("div", { class: "results-head" },
       el("div", { class: "score", "aria-label": `Score: ${right} out of ${problems.length}` }, `${right}/${problems.length}`),
       el("div", {},
         el("h1", {}, right === problems.length ? "Clean sheet." : missed.length ? "Here's what to work on." : "Quiz finished."),
         el("p", { class: "muted" }, `${Math.round(score * 100)}% correct. ${timeLine} ${paceLine}`),
         verdict ? el("p", { class: `verdict ${verdict.ready ? "ready" : "not-ready"}` }, verdict.text) : null)),
-    el("table", { class: "breakdown" },
+    el("table", { class: "breakdown by-question" },
+      el("thead", {}, el("tr", {}, el("th", {}, "#"), el("th", {}, "Topic"), el("th", {}, "Result"), el("th", {}, "Time"), el("th", {}, ""))),
+      el("tbody", {}, problems.map((problem, i) => {
+        const r = results[i];
+        const status = !r ? "Not reached" : r.skipped ? "Skipped" : r.correct ? "Correct" : "Missed";
+        const bubble = !r || r.skipped ? "skipped" : r.correct ? "right" : "wrong";
+        return el("tr", {},
+          el("td", {}, el("span", { class: `bubble ${bubble}` }, String(i + 1))),
+          el("td", {}, problem.topic_title),
+          el("td", { class: r?.correct ? "" : "status-missed" }, status),
+          el("td", { class: "num" }, r && !r.skipped && r.seconds != null ? clock(r.seconds) : ""),
+          el("td", {}, r?.correct ? "" : el("a", { href: `#missed-${i + 1}`, onclick: (e) => { e.preventDefault(); document.getElementById(`missed-${i + 1}`)?.scrollIntoView({ behavior: "smooth" }); } }, "See question")));
+      }))),
+    repeatedTopics(byTopic) ? el("h2", {}, "By topic") : null,
+    repeatedTopics(byTopic) ? el("table", { class: "breakdown" },
       el("thead", {}, el("tr", {}, el("th", {}, "Topic"), el("th", {}, "Score"), el("th", {}, "Avg time"), el("th", {}, ""))),
       el("tbody", {}, Object.entries(byTopic).map(([id, t]) => {
         const topic = state.topics[id];
@@ -514,20 +528,24 @@ function showResults() {
           el("td", { class: "num" }, `${t.right} / ${t.total}`),
           el("td", { class: "num" }, avg != null ? clock(avg) : ""),
           el("td", {}, t.right < t.total && topic ? el("a", { href: `#notes/${topic.module}/${slug(topic.heading)}` }, "Review notes") : ""));
-      }))),
+      }))) : null,
     missed.length ? el("h2", {}, exam ? "Missed and unanswered questions" : "Missed questions") : null,
-    missed.length ? el("ol", { class: "missed" }, missed.map(({ problem, r }) =>
-      el("li", {},
-        el("div", { class: "label" }, problem.topic_title),
+    missed.length ? el("ol", { class: "missed" }, missed.map(({ problem, r, n }) => {
+      const topic = state.topics[problem.topic];
+      return el("li", { id: `missed-${n}` },
+        el("div", { class: "label" }, `Question ${n}: ${problem.topic_title}`),
         el("div", { html: renderMarkdown(problem.prompt) }),
         el("p", {}, el("span", { class: "label" }, "You answered "),
           !r || r.skipped
             ? el("span", { class: "muted" }, r?.skipped ? "(skipped)" : "(not reached)")
             : el("span", { html: problem.format === "mc" ? renderMarkdown(r.response, { inline: true }) : escapeHtml(r.response) })),
+        r?.feedback ? el("p", { class: "feedback" }, r.feedback) : null,
         r?.answer
           ? [el("p", { html: `<span class="label">Answer </span>${renderMarkdown(r.answer, { inline: true })}` }),
              exam ? el("div", { class: "muted", html: renderMarkdown(r.explanation) }) : null]
-          : el("p", {}, el("button", { class: "quiet", type: "button", onclick: (e) => revealAnswer(problem, e.currentTarget) }, "Show the answer"))))) : null,
+          : el("p", {}, el("button", { class: "quiet", type: "button", onclick: (e) => revealAnswer(problem, e.currentTarget) }, "Show the answer")),
+        topic ? el("p", {}, el("a", { href: `#notes/${topic.module}/${slug(topic.heading)}` }, "Review the notes on this")) : null);
+    })) : null,
     el("div", { class: "actions" },
       missedTopics.length ? el("button", {
         class: "primary", type: "button",
@@ -550,6 +568,11 @@ function showResults() {
   }).catch(() => { /* history is best-effort */ });
 }
 
+/** Show a per-topic summary only when some topic came up more than once. */
+function repeatedTopics(byTopic) {
+  return Object.values(byTopic).some((t) => t.total > 1);
+}
+
 /** Unanswered questions have no checked answer yet - fetch it without logging an attempt. */
 async function revealAnswer(problem, button) {
   const fmt = problem.format;
@@ -558,6 +581,11 @@ async function revealAnswer(problem, button) {
   button.parentElement.replaceWith(
     el("p", { html: `<span class="label">Answer </span>${renderMarkdown(result.answer ?? "", { inline: true })}` }),
     el("div", { class: "muted", html: renderMarkdown(result.explanation ?? "") }));
+}
+
+/** replaceChildren, but skipping null/false placeholders from conditional sections. */
+function fill(node, ...children) {
+  node.replaceChildren(...children.flat().filter((child) => child != null && child !== false));
 }
 
 function escapeHtml(text) {
@@ -606,7 +634,7 @@ async function renderProgress() {
   const weak = stats.topics.filter((t) => t.attempts && t.recent_accuracy < 0.7).map((t) => t.topic);
   const pct = (val) => `${Math.round(val * 100)}%`;
 
-  box.replaceChildren(
+  fill(box,
     el("div", { class: "summary" },
       el("div", {}, el("strong", {}, String(stats.attempts)), el("span", {}, "questions answered")),
       el("div", {}, el("strong", {}, pct(stats.accuracy)), el("span", {}, "correct overall")),

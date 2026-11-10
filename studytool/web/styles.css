@@ -402,6 +402,16 @@ input[type="checkbox"], input[type="radio"] { accent-color: var(--ink); width: 1
 .missed { list-style: none; padding: 0; margin: 0 0 2rem; max-width: var(--measure); }
 .missed li { border-bottom: 1px solid var(--rule); padding: 1rem 0; }
 .missed .label { color: var(--pencil); font-size: var(--step--1); }
+.missed li { scroll-margin-top: 1rem; }
+.missed .feedback { color: var(--red-pen); }
+
+.by-question th:nth-child(1) { width: 3.5rem; }
+.by-question th:nth-child(2) { width: auto; }
+.by-question th:nth-child(3), .by-question th:nth-child(4) { width: 7rem; }
+.by-question th:nth-child(5) { width: 8rem; }
+.by-question td { vertical-align: middle; }
+.by-question .bubble { --size: 1.45rem; }
+.status-missed { color: var(--red-pen); }
 
 .verdict { margin: 0.5rem 0 0; font-weight: 700; }
 .verdict.ready { color: var(--good); }
