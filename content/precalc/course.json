@@ -259,6 +259,50 @@
               "heading": "11. Height Problems"
             }
           ]
+        },
+        {
+          "id": "s2m7",
+          "number": 7,
+          "title": "Function Transformations and Symmetry",
+          "file": "section-2/module-7-function-transformations-and-symmetry.md",
+          "topics": [
+            {
+              "id": "function-shifts",
+              "heading": "1. Shifting Up, Down, Left, and Right"
+            },
+            {
+              "id": "combined-shifts",
+              "heading": "2. Combining Shifts"
+            },
+            {
+              "id": "reflections",
+              "heading": "3. Reflections"
+            },
+            {
+              "id": "even-odd-functions",
+              "heading": "4. Even, Odd, or Neither"
+            },
+            {
+              "id": "vertical-stretches",
+              "heading": "5. Vertical Stretches and Compressions"
+            },
+            {
+              "id": "horizontal-stretches",
+              "heading": "6. Horizontal Stretches and Compressions"
+            },
+            {
+              "id": "transformation-sequences",
+              "heading": "7. Putting Transformations in Order"
+            },
+            {
+              "id": "corresponding-points",
+              "heading": "8. Following a Point Through a Transformation"
+            },
+            {
+              "id": "transformed-domain-range",
+              "heading": "9. Domain and Range After a Transformation"
+            }
+          ]
         }
       ]
     }

@@ -97,3 +97,4 @@ Current coverage:
 
 5. Linear Functions and Systems
 6. Quadratic Functions
+7. Function Transformations and Symmetry

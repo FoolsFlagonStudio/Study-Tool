@@ -78,3 +78,16 @@ Notes for building generators in the study tool. Each row is a problem template;
 | completing-the-square | General form → vertex form | expression (vertex form) | forgot to multiply the subtracted number by $a$; sign of $h$; half of $b$ not squared |
 | quadratic-formula | Standard or rearranged equation → solutions | numbers | $-b$ sign; $b^2$ sign; dividing only part by $2a$ |
 | height-functions | $v_0$, $h_0$, units → time of peak or max height | number | time given as height; wrong gravity constant; ignored $h_0$ |
+
+## Module 7: Function Transformations and Symmetry
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| function-shifts | Parent + one shift → describe, key point, or equation | choice / ordered pair | inside shift read with the wrong sign; inside vs. outside confused |
+| combined-shifts | $f(x - h) + k$ → describe, key point, or equation from a key point | choice / ordered pair | sign of $h$ flipped; $h$ and $k$ swapped |
+| reflections | Polynomial or radical/absolute value → $-f(x)$ or $f(-x)$; name the reflection | expression / choice | only first term negated; constant changed for $f(-x)$; axes swapped |
+| even-odd-functions | Polynomial or $\frac{a}{x^n}$ (+ constant) → classify, or simplify $f(-x)$ | choice / expression | constant term ignored; $(-x)^{\text{even}}$ sign error |
+| vertical-stretches | $a \cdot f(x)$ → describe; parent + point → $a$ | choice / number | stretch vs. compression; factor inverted; horizontal vs. vertical |
+| horizontal-stretches | $f(bx)$ → describe; corresponding points → $b$ or the new point | choice / number / ordered pair | multiplied by $b$ instead of dividing; $b$ inverted |
+| transformation-sequences | $a f(\pm x - h) + k$ → describe in order; key point + point → $a$ | choice / number | shift before stretch; wrong direction; inverted $a$ |
+| corresponding-points | Point on a parent + $a f(\pm x - h) + k$ → new point | ordered pair | shifted before stretching; $h$ sign flipped; reflection on the wrong coordinate |
+| transformed-domain-range | Domain or range interval + transformation → new interval | choice | vertical change applied to the domain; stretch skipped; direction not flipped |
