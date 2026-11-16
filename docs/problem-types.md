@@ -63,3 +63,18 @@ Notes for building generators in the study tool. Each row is a problem template;
 | elimination-method | $ax + by = c$ pairs needing 0, 1 or 2 multiplications | ordered pair | forgot to multiply the constant; sign error; swapped coordinates |
 | types-of-systems | Two equations → independent / dependent / inconsistent | choice | parallel vs. same line confusion; judge by intercepts instead of slopes |
 | system-word-problems | Current / wind, tickets, mixture, break-even | number(s) / system | times swapped; with/against swapped; count and value equations mixed up |
+
+## Module 6: Quadratic Functions
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| parabola-features | General form → direction, max/min, $y$-intercept; direction + intercept → equation | choice / number | sign of $a$ misread; $y$-intercept from the wrong term; order of terms rearranged |
+| quadratic-domain-range | Equation with easy vertex → range (interval or inequality) or domain | choice | $x$-value of vertex used; direction flipped; bracket vs. parenthesis; range given as all reals |
+| gcf-factoring | $ax^n + bx^m (+ c)$ → factor out the GCF | factored expression | non-greatest factor; largest exponent used; a dropped 1 |
+| difference-of-squares | $a^2x^2 - b^2$, with optional GCF or fourth powers | factored expression | sum instead of difference; GCF forgotten; stopped after one step |
+| factoring-by-grouping | $(px^2 + q)(rx + s)$ expanded | factored expression | sign of second group; mismatched binomials |
+| graphing-quadratics | Evaluate $y = ax^2 + bx + c$ at an $x$ in a table | number | $(-x)^2$ sign error; $-x^2$ squared as positive |
+| vertex-and-axis | General form → axis, vertex, or max/min value | number / ordered pair | $\frac{b}{2a}$ sign; missing 2; $x$ given instead of the value |
+| vertex-form | $a(x - h)^2 + k$ → vertex, $y$-intercept, or $x$-intercepts | ordered pair / numbers | sign of $h$ flipped; forgot $\pm$; forgot to square |
+| completing-the-square | General form → vertex form | expression (vertex form) | forgot to multiply the subtracted number by $a$; sign of $h$; half of $b$ not squared |
+| quadratic-formula | Standard or rearranged equation → solutions | numbers | $-b$ sign; $b^2$ sign; dividing only part by $2a$ |
+| height-functions | $v_0$, $h_0$, units → time of peak or max height | number | time given as height; wrong gravity constant; ignored $h_0$ |

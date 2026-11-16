@@ -207,6 +207,58 @@
               "heading": "9. Word Problems with Systems"
             }
           ]
+        },
+        {
+          "id": "s2m6",
+          "number": 6,
+          "title": "Quadratic Functions",
+          "file": "section-2/module-6-quadratic-functions.md",
+          "topics": [
+            {
+              "id": "parabola-features",
+              "heading": "1. Parabolas: Shape and Direction"
+            },
+            {
+              "id": "quadratic-domain-range",
+              "heading": "2. Domain and Range of a Quadratic"
+            },
+            {
+              "id": "gcf-factoring",
+              "heading": "3. Factoring Out the GCF"
+            },
+            {
+              "id": "difference-of-squares",
+              "heading": "4. Difference of Squares"
+            },
+            {
+              "id": "factoring-by-grouping",
+              "heading": "5. Factoring by Grouping"
+            },
+            {
+              "id": "graphing-quadratics",
+              "heading": "6. Graphing with a Table"
+            },
+            {
+              "id": "vertex-and-axis",
+              "heading": "7. Vertex and Axis of Symmetry"
+            },
+            {
+              "id": "vertex-form",
+              "heading": "8. Vertex Form"
+            },
+            {
+              "id": "completing-the-square",
+              "heading": "9. Completing the Square"
+            },
+            {
+              "id": "quadratic-formula",
+              "heading": "10. The Quadratic Formula"
+            },
+            {
+              "id": "height-functions",
+              "heading": "11. Height Problems"
+            }
+          ]
         }
       ]
     }

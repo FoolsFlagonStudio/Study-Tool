@@ -64,6 +64,7 @@ def normalize(text: str) -> str:
         "−": "-", "–": "-", "×": "*", "·": "*", "÷": "/", "π": "pi",
         "√": "sqrt", "∛": "cbrt", "²": "^2", "³": "^3", "**": "^",
     }
+    text = re.sub(r"√\s*(\d+(\.\d+)?|[a-z])", r"sqrt(\1)", text)  # √57 means sqrt(57), not sqrt·57
     for old, new in replacements.items():
         text = text.replace(old, new)
     # Drop a leading "y =" / "f(x) =" if the student wrote one.
@@ -146,12 +147,14 @@ def parse_numbers(text: str) -> list[sp.Expr]:
     for chunk in (c.strip() for c in _split_top_level(text)):
         if not chunk:
             continue
-        plus_minus = chunk.startswith("±") or chunk.startswith("+-")
-        chunk = chunk.lstrip("±").removeprefix("+-")
-        expr = parse_expression(chunk)
-        if expr.free_symbols:
-            raise InputError("Enter numbers only.")
-        values.extend([expr, -expr] if plus_minus else [expr])
+        chunk = chunk.replace("+-", "±")
+        # "±27" or "(3 ± sqrt(57))/8": one value with +, one with -
+        options = [chunk.replace("±", sign, 1) for sign in "+-"] if "±" in chunk else [chunk]
+        for option in options:
+            expr = parse_expression(option.lstrip("+"))
+            if expr.free_symbols:
+                raise InputError("Enter numbers only.")
+            values.append(expr)
     if not values:
         raise InputError("Type an answer first.")
     return values
@@ -288,12 +291,81 @@ def _form_rational_exponent(text: str, expr: sp.Expr) -> str | None:
     return None
 
 
+def _product_factors(text: str) -> list[sp.Expr]:
+    """The top-level factors of an answer exactly as typed, e.g. 2x(x - 3)^2 gives
+    [2, x, x - 3, x - 3]. Raises if the answer isn't written as a product."""
+    raw = parse_expression(text, evaluate=False)
+    factors = []
+    for factor, _ in _factor_list(raw):
+        if factor.is_Pow and factor.exp.is_Integer and factor.exp > 0:
+            factors.extend([factor.base] * int(factor.exp))
+        else:
+            factors.append(factor)
+    return factors
+
+
+def _polynomial_factors(text: str) -> list[sp.Expr] | None:
+    factors = [sp.expand(f) for f in _product_factors(text)]
+    polys = [f for f in factors if f.free_symbols]
+    if len(factors) < 2 and all(f.is_Add for f in polys):
+        return None  # still a sum, nothing has been factored out
+    return polys
+
+
+def _form_gcf(text: str, expr: sp.Expr) -> str | None:
+    polys = _polynomial_factors(text)
+    if polys is None:
+        return "Write it as a product: the GCF times what's left in parentheses."
+    for poly in polys:
+        if not poly.is_Add:
+            continue
+        shared_powers, rest = sp.Poly(poly, *sorted(poly.free_symbols, key=str)).terms_gcd()
+        if any(shared_powers) or abs(rest.primitive()[0]) != 1:
+            return "There's still a common factor inside the parentheses - take out the greatest common factor."
+    return None
+
+
+def _form_factored(text: str, expr: sp.Expr) -> str | None:
+    polys = _polynomial_factors(text)
+    if polys is None:
+        return "Write it as a product of factors."
+    for poly in polys:
+        content, pieces = sp.factor_list(poly)
+        if abs(content) != 1:
+            return f"Factor completely - ${sp.latex(poly)}$ still has a common factor of {abs(content)}."
+        if sum(mult for _, mult in pieces) > 1:
+            return f"Factor completely - ${sp.latex(poly)}$ can be factored further."
+    return None
+
+
+def _form_vertex(text: str, expr: sp.Expr) -> str | None:
+    var = SYMS["x"]
+    raw = parse_expression(text, evaluate=False)
+    squares = []
+
+    def is_square(node) -> bool:
+        if not (node.is_Pow and node.exp == 2 and node.base.is_Add):
+            return False
+        base = sp.expand(node.base)
+        return sp.Poly(base, var).degree() == 1 and sp.Poly(base, var).LC() == 1 if base.has(var) else False
+
+    replaced = raw.replace(is_square, lambda node: squares.append(node) or sp.Dummy())
+    if not squares or replaced.has(var):
+        return "Write it in vertex form, $a(x - h)^2 + k$."
+    if len(sp.Add.make_args(raw)) > 2:
+        return "Combine the constants at the end."
+    return None
+
+
 FORMS = {
     "expanded": _form_expanded,
     "monomial": _form_monomial,
     "positive_exponents": _form_positive_exponents,
     "radical": _form_radical,
     "rational_exponent": _form_rational_exponent,
+    "gcf": _form_gcf,
+    "factored": _form_factored,
+    "vertex": _form_vertex,
 }
 
 
@@ -372,6 +444,12 @@ def _preview_number(chunk: str) -> str:
     chunk = chunk.strip().replace("+-", "±")
     sign = "\\pm " if chunk.startswith("±") else ""
     body = chunk.lstrip("±")
+    if "±" in body:
+        # Show (3 ± sqrt(57))/8 by rendering it with + and swapping that plus back to ±.
+        nth = sum(1 for ch in body[: body.index("±")] if ch == "+")
+        pieces = sp.latex(parse_expression(body.replace("±", "+", 1), evaluate=False)).split("+")
+        if len(pieces) > nth + 1:
+            return sign + "+".join(pieces[: nth + 1]) + "\\pm" + "+".join(pieces[nth + 1 :])
     if re.fullmatch(r"\s*-?\s*\d+(\.\d+)?\s*(/\s*\d+)?\s*", body):
         # A plain number or fraction: show it as typed ("0.5", "-3/4") rather than as SymPy's 1·(1/4).
         number = body.replace(" ", "")

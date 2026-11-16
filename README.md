@@ -96,3 +96,4 @@ Current coverage:
 **Section 2 - Linear and Quadratic Functions**
 
 5. Linear Functions and Systems
+6. Quadratic Functions
