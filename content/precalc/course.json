@@ -305,6 +305,48 @@
           ]
         }
       ]
+    },
+    {
+      "id": "section-3",
+      "title": "Exponentials, Logarithms, and Sequences",
+      "modules": [
+        {
+          "id": "s3m8",
+          "number": 8,
+          "title": "Exponential Functions and Transformations",
+          "file": "section-3/module-8-exponential-functions-and-transformations.md",
+          "topics": [
+            {
+              "id": "identifying-exponentials",
+              "heading": "1. What Makes a Function Exponential"
+            },
+            {
+              "id": "evaluating-exponentials",
+              "heading": "2. Evaluating Exponential Functions"
+            },
+            {
+              "id": "exponential-graphs",
+              "heading": "3. Graphs and Key Points"
+            },
+            {
+              "id": "logarithmic-form",
+              "heading": "4. Logarithms: Asking for the Exponent"
+            },
+            {
+              "id": "evaluating-logarithms",
+              "heading": "5. Evaluating Logarithms"
+            },
+            {
+              "id": "solving-exponential-equations",
+              "heading": "6. Solving Exponential Equations"
+            },
+            {
+              "id": "compound-interest",
+              "heading": "7. Compound Interest and the Number $e$"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

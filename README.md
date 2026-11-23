@@ -94,7 +94,9 @@ Current coverage:
 4. Inverse Functions
 
 **Section 2 - Linear and Quadratic Functions**
-
 5. Linear Functions and Systems
 6. Quadratic Functions
 7. Function Transformations and Symmetry
+
+**Section 3 - Exponentials, Logarithms, and Sequences**
+8. Exponential Functions and Transformations

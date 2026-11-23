@@ -91,3 +91,14 @@ Notes for building generators in the study tool. Each row is a problem template;
 | transformation-sequences | $a f(\pm x - h) + k$ → describe in order; key point + point → $a$ | choice / number | shift before stretch; wrong direction; inverted $a$ |
 | corresponding-points | Point on a parent + $a f(\pm x - h) + k$ → new point | ordered pair | shifted before stretching; $h$ sign flipped; reflection on the wrong coordinate |
 | transformed-domain-range | Domain or range interval + transformation → new interval | choice | vertical change applied to the domain; stretch skipped; direction not flipped |
+
+## Module 8: Exponential Functions and Transformations
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| identifying-exponentials | Classify $b^x$ vs. $x^n$ vs. $mx$; growth vs. decay | choice | base vs. exponent confused; $b > 0$ taken as growth |
+| evaluating-exponentials | $a \cdot b^{x - h} + k$ at an integer, including negative exponents | number | negative exponent made negative; coefficient multiplied into the base |
+| exponential-graphs | $a \cdot b^{x - h} + k$ → asymptote, a key point, range, or growth/decay | number / ordered pair / choice | $h$ sign; asymptote from $h$ or $a$; range direction when $a < 0$ |
+| logarithmic-form | Convert $b^y = x$ ⇔ $\log_b x = y$ | choice | base and argument swapped; exponent placed inside the log |
+| evaluating-logarithms | $\log_b$ of a power of $b$ (including fractions and shared bases), common log of powers of 10, $\ln e^n$ | number | reciprocal; sign; counted zeros wrong |
+| solving-exponential-equations | $b^{x + m} = c^{x + n}$ or $a \cdot b^x = c$ | number (decimal) | distributed the log wrong; divided the wrong way |
+| compound-interest | Periodic, continuous, or decay with given $P$, $r$, $t$, $n$ | number | rate not converted to a decimal; $t$ not multiplied by $n$; wrong formula |
