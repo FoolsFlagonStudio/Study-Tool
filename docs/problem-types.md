@@ -102,3 +102,15 @@ Notes for building generators in the study tool. Each row is a problem template;
 | evaluating-logarithms | $\log_b$ of a power of $b$ (including fractions and shared bases), common log of powers of 10, $\ln e^n$ | number | reciprocal; sign; counted zeros wrong |
 | solving-exponential-equations | $b^{x + m} = c^{x + n}$ or $a \cdot b^x = c$ | number (decimal) | distributed the log wrong; divided the wrong way |
 | compound-interest | Periodic, continuous, or decay with given $P$, $r$, $t$, $n$ | number | rate not converted to a decimal; $t$ not multiplied by $n$; wrong formula |
+
+## Module 9: Logarithmic Functions and Equations
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| log-graph-features | $\log_b(x - h) + k$ → asymptote, domain, $x$-intercept, increasing/decreasing; base from a point | number / choice | $h$ sign; $k$ applied to the asymptote; domain as all reals |
+| log-graph-points | $(b^n, n)$ on $\log_b x$ → matching point on a shifted log | ordered pair | inside shift in the wrong direction; shift applied to the wrong coordinate |
+| change-of-base | $\log_a M$ → decimal | number | fraction flipped ($\log a / \log M$); $\log(M/a)$ |
+| inverse-properties | $b^{\log_b M}$, $\log_b b^n$, $\log_b$ of fractions and roots | number | reciprocal; sign; root index used as the answer |
+| expanding-logs | $\log_b\left(\frac{c\,x^p y^q}{z^r}\right)$, roots | choice | sign on the denominator terms; exponent not brought down; constant not evaluated |
+| condensing-logs | numeric and symbolic sums/differences with coefficients | number / choice | coefficient not moved up first; subtraction treated as addition |
+| solving-log-equations | definition, one-to-one with extraneous roots, condense-then-solve | numbers | extraneous root kept; $b^n$ vs. $n^b$; forgot to condense |
+| log-applications | decibels, pH, Richter comparisons | number | $10^d$ vs. $10d$; forgot the 10 in dB; pH sign |

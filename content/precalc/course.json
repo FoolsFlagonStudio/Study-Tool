@@ -345,6 +345,46 @@
               "heading": "7. Compound Interest and the Number $e$"
             }
           ]
+        },
+        {
+          "id": "s3m9",
+          "number": 9,
+          "title": "Logarithmic Functions and Equations",
+          "file": "section-3/module-9-logarithmic-functions-and-equations.md",
+          "topics": [
+            {
+              "id": "log-graph-features",
+              "heading": "1. Logarithms and Their Graphs"
+            },
+            {
+              "id": "log-graph-points",
+              "heading": "2. Following Points Through a Shift"
+            },
+            {
+              "id": "change-of-base",
+              "heading": "3. Change of Base"
+            },
+            {
+              "id": "inverse-properties",
+              "heading": "4. Inverse Properties"
+            },
+            {
+              "id": "expanding-logs",
+              "heading": "5. Expanding Logarithms"
+            },
+            {
+              "id": "condensing-logs",
+              "heading": "6. Condensing Logarithms"
+            },
+            {
+              "id": "solving-log-equations",
+              "heading": "7. Solving Logarithmic Equations"
+            },
+            {
+              "id": "log-applications",
+              "heading": "8. Logarithms in the Real World"
+            }
+          ]
         }
       ]
     }
