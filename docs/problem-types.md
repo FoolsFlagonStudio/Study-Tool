@@ -114,3 +114,13 @@ Notes for building generators in the study tool. Each row is a problem template;
 | condensing-logs | numeric and symbolic sums/differences with coefficients | number / choice | coefficient not moved up first; subtraction treated as addition |
 | solving-log-equations | definition, one-to-one with extraneous roots, condense-then-solve | numbers | extraneous root kept; $b^n$ vs. $n^b$; forgot to condense |
 | log-applications | decibels, pH, Richter comparisons | number | $10^d$ vs. $10d$; forgot the 10 in dB; pH sign |
+
+## Module 10: Sequences and Series
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| sequence-terms | Evaluate $a_n$ from a formula; pick a formula for listed terms | number / choice | $n$ instead of $n - 1$; formula that fits only the first terms |
+| arithmetic-sequences | Find $d$, a term, or $a_n$ from a list or two terms; applications | number / expression | $d$ sign; $(n - 1)$ dropped; off-by-one in applications |
+| geometric-sequences | Find $r$, a term, or $a_n$ from a list or two terms; growth/decay | number / choice | $r$ inverted; exponent $n$ instead of $n - 1$; decay rate used as $r$ |
+| summation-notation | Evaluate $\sum_{i = m}^{n} a_i$ | number | lower limit treated as 1; one term missed |
+| arithmetic-series | $S_n$ from a list or a word problem | number | wrong last term; forgot to divide by 2 |
+| geometric-series | $S_n$ from a list, salary, or doubling problem | number | $r^{n - 1}$ in the sum formula; sign error with negative $r$ |

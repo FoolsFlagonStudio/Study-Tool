@@ -385,6 +385,38 @@
               "heading": "8. Logarithms in the Real World"
             }
           ]
+        },
+        {
+          "id": "s3m10",
+          "number": 10,
+          "title": "Sequences and Series",
+          "file": "section-3/module-10-sequences-and-series.md",
+          "topics": [
+            {
+              "id": "sequence-terms",
+              "heading": "1. Sequences and Their Terms"
+            },
+            {
+              "id": "arithmetic-sequences",
+              "heading": "2. Arithmetic Sequences"
+            },
+            {
+              "id": "geometric-sequences",
+              "heading": "3. Geometric Sequences"
+            },
+            {
+              "id": "summation-notation",
+              "heading": "4. Summation Notation"
+            },
+            {
+              "id": "arithmetic-series",
+              "heading": "5. Arithmetic Series"
+            },
+            {
+              "id": "geometric-series",
+              "heading": "6. Geometric Series"
+            }
+          ]
         }
       ]
     }

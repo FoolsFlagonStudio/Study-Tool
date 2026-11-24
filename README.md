@@ -101,3 +101,4 @@ Current coverage:
 **Section 3 - Exponentials, Logarithms, and Sequences**
 8. Exponential Functions and Transformations
 9. Logarithmic Functions and Equations
+10. Sequences and Series
