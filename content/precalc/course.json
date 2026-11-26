@@ -419,6 +419,52 @@
           ]
         }
       ]
+    },
+    {
+      "id": "section-4",
+      "title": "Trigonometry: Functions, Graphs, and Applications",
+      "modules": [
+        {
+          "id": "s4m11",
+          "number": 11,
+          "title": "Preparing for Trigonometry",
+          "file": "section-4/module-11-preparing-for-trigonometry.md",
+          "topics": [
+            {
+              "id": "angle-quadrants",
+              "heading": "1. Angles in Standard Position"
+            },
+            {
+              "id": "degree-radian-conversion",
+              "heading": "2. Degrees and Radians"
+            },
+            {
+              "id": "angle-types",
+              "heading": "3. Classifying Angles"
+            },
+            {
+              "id": "coterminal-angles",
+              "heading": "4. Coterminal Angles"
+            },
+            {
+              "id": "complements-supplements",
+              "heading": "5. Complementary and Supplementary Angles"
+            },
+            {
+              "id": "arc-length",
+              "heading": "6. Arc Length"
+            },
+            {
+              "id": "sector-area",
+              "heading": "7. Area of a Sector"
+            },
+            {
+              "id": "sector-applications",
+              "heading": "8. Sector Problems in the Real World"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

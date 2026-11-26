@@ -102,3 +102,6 @@ Current coverage:
 8. Exponential Functions and Transformations
 9. Logarithmic Functions and Equations
 10. Sequences and Series
+
+**Section 4 - Trigonometry: Functions, Graphs, and Applications**
+11. Preparing for Trigonometry

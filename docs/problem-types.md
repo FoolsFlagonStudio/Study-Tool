@@ -124,3 +124,15 @@ Notes for building generators in the study tool. Each row is a problem template;
 | summation-notation | Evaluate $\sum_{i = m}^{n} a_i$ | number | lower limit treated as 1; one term missed |
 | arithmetic-series | $S_n$ from a list or a word problem | number | wrong last term; forgot to divide by 2 |
 | geometric-series | $S_n$ from a list, salary, or doubling problem | number | $r^{n - 1}$ in the sum formula; sign error with negative $r$ |
+
+## Module 11: Preparing for Trigonometry
+| Topic | Template | Answer format | Distractors (common mistakes) |
+|---|---|---|---|
+| angle-quadrants | Degrees or radians, negative or over $360°$ → quadrant or quadrantal | choice | negative angle placed counterclockwise; forgot to reduce |
+| degree-radian-conversion | Degrees ⇔ radians, special and non-special angles | expression / number | factor flipped; fraction not reduced |
+| angle-types | Degrees or radians → acute/right/obtuse/straight/quadrantal | choice | radians compared as degrees; boundary values |
+| coterminal-angles | Coterminal angle in a range, positive/negative, check two angles | number / choice | added $180°$; wrong number of turns |
+| complements-supplements | Complement or supplement in degrees or radians, or "none" | number / choice | swapped 90 and 180; negative result kept |
+| arc-length | $s$, $\theta$, or $r$ from the other two; degrees given | number | degrees not converted; divided the wrong way |
+| sector-area | $A$ or $r$; degrees given | number | forgot $\frac{1}{2}$; $r$ not squared; degrees used |
+| sector-applications | Clocks, orbits, sprinklers, wheels, perimeter | number | diameter used as radius; orbit height not added; perimeter missing radii |
